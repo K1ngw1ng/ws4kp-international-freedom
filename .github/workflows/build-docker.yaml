@@ -21,7 +21,7 @@ jobs:
           images: |
             ghcr.io/K1ngw1ng/ws4kp-international-freedom
           flavor: |
-            latest=false
+            latest=true
           tags: |
             type=raw,priority=1000,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
             type=ref,event=branch
