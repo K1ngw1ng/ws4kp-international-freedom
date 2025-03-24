@@ -1,5 +1,5 @@
 {
-	"name": "ws4kp-international",
+	"name": "ws4kp-international-freedom",
 	"version": "6.0.0",
 	"description": "Welcome to the WeatherStar 4000+ project page!",
 	"main": "index.js",
@@ -14,9 +14,9 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mwood77/ws4kp-international.git"
+		"url": "git+http://192.168.86.24:3002/K1ngw1ng/ws4kp-international-freedom.git"
 	},
-	"author": "Matt Walsh",
+	"author": "Matt Walsh,mwood77,K1ngw1ng",
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/mwood77/ws4kp-international/issues"

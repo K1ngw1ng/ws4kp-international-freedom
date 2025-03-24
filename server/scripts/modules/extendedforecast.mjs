@@ -70,8 +70,8 @@ const parse = (fullForecast) => {
 			icon: getWeatherIconFromIconLink(text, fullForecast.timeZone),
 			date: period.hours[0].time,
 			dayName: date.toLocaleDateString('en-US', { weekday: 'long' }),
-			high: period.temperature_2m_max,
-			low: period.temperature_2m_min,
+			high: Math.round((period.temperature_2m_max * 9/5) + 32),
+			low: Math.round((period.temperature_2m_min * 9/5) + 32),
 		};
 
 		forecast.push(fDay);

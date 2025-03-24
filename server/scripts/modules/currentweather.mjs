@@ -112,27 +112,25 @@ const getCurrentWeatherByHourFromTime = (data) => {
 const parseData = (data) => {
 	const currentForecast = getCurrentWeatherByHourFromTime(data);
 
-	// values from api are provided in metric
-	data.Temperature = currentForecast.temperature_2m;
-	data.TemperatureUnit = 'C';
-	data.DewPoint = currentForecast.dew_point_2m;
-	data.Ceiling = currentForecast.cloud_cover;
-	data.CeilingUnit = 'm.';
-	data.Visibility = currentForecast.visibility;
-	data.VisibilityUnit = 'm.';
-	data.WindSpeed = currentForecast.wind_speed_10m;
+// Convert metric values to American units
+	data.Temperature = Math.round((currentForecast.temperature_2m * 9/5) + 32);
+	data.TemperatureUnit = 'F';
+	data.DewPoint = Math.round((currentForecast.dew_point_2m * 9/5) + 32);
+	data.Ceiling = Math.round(currentForecast.cloud_cover * 3.281);
+	data.CeilingUnit = 'ft';
+	data.Visibility = Math.round(currentForecast.visibility * 0.000621371);
+	data.VisibilityUnit = 'mi';
+	data.WindSpeed = Math.round(currentForecast.wind_speed_10m * 0.621371);
 	data.WindDirection = directionToNSEW(currentForecast.wind_direction_10m);
-	data.Pressure = currentForecast.pressure_msl;
-	// data.HeatIndex = Math.round(observations.heatIndex.value);
-	// data.WindChill = Math.round(observations.windChill.value);
-	data.WindGust = currentForecast.wind_gusts_10m;
-	data.WindUnit = 'km/h';
-	data.Humidity = currentForecast.relative_humidity_2m;
-	data.PressureDirection = 'hPa';
+	data.Pressure = Math.round(currentForecast.pressure_msl * 0.02953);
+	data.PressureDirection = 'inHg';
+	data.WindGust = Math.round(currentForecast.wind_gusts_10m * 0.621371);
+	data.WindUnit = 'mph';
+	data.Humidity = Math.round(currentForecast.relative_humidity_2m);
 	data.TextConditions = currentForecast.weather_code;
 
-	return data;
-};
+return data;
+
 
 const display = new CurrentWeather(1, 'current-weather');
 registerDisplay(display);
