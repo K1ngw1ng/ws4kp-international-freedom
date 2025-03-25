@@ -140,15 +140,16 @@ const getCurrentWeatherByHourFromTime = (data) => {
 	return { closestTime, index: closestIndex, todayAndTomorrow: allAvailableTimes };
 };
 
+// extract specific values from forecast and format as an array
 const parseForecast = async (data) => {
 	const currentForecast = getCurrentWeatherByHourFromTime(data);
 
 	// Split today's date at the returned hourly index and iterate through 'todayAndTomorrow' from currentForecast to create hourly rows
 	const iterableHourlyData = currentForecast.todayAndTomorrow.slice(currentForecast.index).map((hour) => ({
-		temperature: Math.round((hour.temperature_2m * 9/5) + 32), // Convert °C to °F
-		apparentTemperature: Math.round((hour.apparent_temperature * 9/5) + 32), // Convert °C to °F
-		windSpeed: Math.round(hour.wind_speed_10m * 0.621371), // Convert km/h to mph
-		windDirection: directionToNSEW(hour.wind_direction_10m),
+		temperature: hour.temperature_2m,
+		apparentTemperature: hour.apparent_temperature,
+		windSpeed: hour.wind_speed_10m,
+		windDirection: hour.wind_direction_10m,
 		probabilityOfPrecipitation: hour.precipitation_probability,
 		skyCover: hour.cloud_cover,
 		icon: getWeatherRegionalIconFromIconLink(getConditionText(hour.weather_code), hour.is_day),
